@@ -1,0 +1,11 @@
+{
+  "name": "training2",
+  "version": "1.0.0",
+  "description": "Training task 2",
+  "main": "index.html",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "gonch",
+  "license": "ISC"
+}
