@@ -121,7 +121,8 @@
 
   window.slider = {
     addSliderEventListeners: addSliderEventListeners,
-    removeSliderEventListeners: removeSliderEventListeners
+    removeSliderEventListeners: removeSliderEventListeners,
+    setStyleX: setStyleX
   };
 
 

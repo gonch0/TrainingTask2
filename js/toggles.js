@@ -195,7 +195,7 @@
     document.addEventListener('click', onSuccessClose);
     document.body.insertAdjacentElement('afterbegin', successElement);
     form.reset();
-
+    window.slider.setStyleX(0);
     onPickupButtonClick();
     onCardButtonClick();
     submitButton.disabled = true;
