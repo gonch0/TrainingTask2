@@ -18,6 +18,7 @@
   var cardField = document.querySelector('.card');
   var CARD_INPUT_LENGTH = 4;
   var CARD_NUMBER_LENGTH = 16;
+  var MAX_DAYS = 7 * 24 * 3600 * 1000;
   var index;
 
   var addPrefix = function (p) {
@@ -46,8 +47,7 @@
     var inputtedContent = dateContent.split('/');
     var inputtedDate = new Date(inputtedContent[2], inputtedContent[1] - 1, inputtedContent[0]);
     var todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    var maxDays = 7 * 24 * 3600 * 1000;
-    var outDateCondition = +inputtedDate < +todayDate || +inputtedDate - +todayDate > maxDays;
+    var outDateCondition = +inputtedDate < +todayDate || +inputtedDate - +todayDate > MAX_DAYS;
 
     checkInputValidity(dateInput, !outDateCondition);
 
@@ -70,7 +70,7 @@
     if (number.length !== CARD_NUMBER_LENGTH) {
       return false;
     }
-
+    // Алгоритм Луна:
     var sum = 0;
     var numberArray = number.split('').map(Number);
     numberArray.forEach(function (digit, i) {
