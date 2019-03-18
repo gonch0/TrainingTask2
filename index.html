@@ -2,14 +2,14 @@
 <html>
 <head>
   <title>Оформление заказа</title>
-  <meta name="charset" content="utf-8">
+  <meta charset="utf-8">
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&amp;subset=cyrillic" rel="stylesheet">
   <link rel="stylesheet" href="main.css">
 </head>
 <body>
 
 <div id="layout">
-  <form enctype="multipart/form-data" autocomplete="off" action="http://httpbin.org/post" >
+  <form class="orderForm" enctype="multipart/form-data" method="post" autocomplete="off">
     <div role="radiogroup">
       <legend class="title">Способ получения товара</legend>
 
@@ -23,41 +23,51 @@
     <section>
       <fieldset role="tabpanel" aria-labelledby="pickup-label">
         <h2>Самовывоз</h2>
-
         <div role="radiogroup">
-          <input type="radio" id="pickup-point-1" name="pickup-point" value="lenina" checked>
-          <label for="pickup-point-1" tabindex="0">Ленина, 10</label>
+          <input type="radio" id="pickup-point-1" name="pickup-point" value="industrii" checked>
+          <label for="pickup-point-1" tabindex="0">Индустрии, 55</label>
 
-          <input type="radio" id="pickup-point-2" name="pickup-point" value="stalina">
-          <label for="pickup-point-2" tabindex="0">Сталина, 20</label>
+          <input type="radio" id="pickup-point-2" name="pickup-point" value="lomonosova">
+          <label for="pickup-point-2" tabindex="0">Ломоносова, 38</label>
 
-          <input type="radio" id="pickup-point-3" name="pickup-point" value="khrustcheva">
-          <label for="pickup-point-3" tabindex="0">Хрущева, 30</label>
+          <input type="radio" id="pickup-point-3" name="pickup-point" value="bazhova">
+          <label for="pickup-point-3" tabindex="0">Бажова, 45</label>
 
-          <input type="radio" id="pickup-point-4" name="pickup-point" value="brezhneva">
-          <label for="pickup-point-4" tabindex="0">Брежнева, 40</label>
+          <input type="radio" id="pickup-point-4" name="pickup-point" value="krilova">
+          <label for="pickup-point-4" tabindex="0">Крылова, 27</label>
         </div>
 
-        <div class="map-container"></div>
+        <div class="map-container" id="map">
+          <iframe id="mapFrame"
+            src=""
+            width="740"
+            height="480"
+            frameborder="0"
+            allowfullscreen>
+        </iframe>
+
+        </div>
       </fieldset>
 
-      <fieldset role="tabpanel" aria-labelledby="delivery-label">
+      <fieldset role="tabpanel" aria-labelledby="delivery-label" hidden disabled>
         <h2>Доставка</h2>
 
-        <fieldset class="group">
-          <label for="address">Адрес</label><input type="text" id="address" name="address" aria-labelledby="tooltip">
+        <fieldset class="group address">
+          <label for="address">Адрес</label><input class="invalid" type="text" id="address" name="address" aria-labelledby="tooltip--address" required>
+          <div class="tooltip" id="tooltip--address" role="tooltip" style="top: 14px; left: 344px;" hidden>Пожалуйста, укажите адрес</div>
         </fieldset>
 
-        <fieldset class="group">
+        <fieldset class="group date">
           <label for="date">Дата доставки</label>
-          <input type="text" id="date" name="date" value="23/08/1988">
+          <input type="text" id="date" name="date"  placeholder="дд/мм/гггг" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" aria-labelledby="tooltip--date" required>
+          <div class="tooltip" id="tooltip--date" role="tooltip" style="top: 14px; left: 104px;" hidden>Пожалуйста, укажите дату доставки (не дальше недели от сегодняшнего дня)</div>
         </fieldset>
 
         <fieldset class="group time">
           <label for="time-from">Время доставки</label>
           <div class="time-slider">
-            <input type="text" value="08:00" id="time-from" name="time-from" readonly>
-            <div class="time-slider-handle"></div>
+            <input type="text" value="08:00" id="time-from" name="time-from" style="width: 54px;" readonly>
+            <div class="time-slider-handle" style="left: 0px;"></div>
           </div>&nbsp;—
           <input type="text" value="10:00" id="time-to" name="time-to" readonly>
         </fieldset>
@@ -73,33 +83,48 @@
         </div>
 
         <fieldset class="card">
-          <label for="card-1">Номер карты</label>
+          <label for="credit-card">Номер карты</label>
 
-          <input type="hidden" name="credit-card" required>
-
-          <input type="text" id="card-1" class="card-section" maxlength="4">
-          <input type="text" id="card-2" class="card-section" maxlength="4">
-          <input type="text" id="card-3" class="card-section" maxlength="4">
-          <input type="text" id="card-4" class="card-section" maxlength="4">
+          <input class="invalid" id="credit-card" type="hidden" name="credit-card" aria-labelledby="tooltip--card" required>
+          <div class="tooltip" id="tooltip--card" role="tooltip" style="top: 14px; left: 212px;" hidden>Пожалуйста, введите номер карты</div>
+          <input type="text" id="card-1" class="card-section invalid" pattern="[0-9]{4}" maxlength="4" aria-labelledby="tooltip--card">
+          <input type="text" id="card-2" class="card-section invalid" pattern="[0-9]{4}" maxlength="4" aria-labelledby="tooltip--card">
+          <input type="text" id="card-3" class="card-section invalid" pattern="[0-9]{4}" maxlength="4" aria-labelledby="tooltip--card">
+          <input type="text" id="card-4" class="card-section invalid" pattern="[0-9]{4}" maxlength="4" aria-labelledby="tooltip--card">
         </fieldset>
       </fieldset>
     </section>
 
     <fieldset class="group phone">
-      <label for="phone">Телефон</label><input type="phone" id="phone" name="phone">
+      <label for="phone">Телефон</label><input class="invalid" type="phone" id="phone" name="phone" aria-labelledby="tooltip--phone" required>
       <p class="phone-description phone-description-pickup">Товар на складе привязывается к номеру телефона, поэтому его нужно будет назвать при выдаче.
-      <p class="phone-description phone-description-delivery">Телефон нужен для того, чтобы курьер мог связаться с вами, когда товар будет доставлен.
+      <p class="phone-description phone-description-delivery" hidden>Телефон нужен для того, чтобы курьер мог связаться с вами, когда товар будет доставлен.
+      <div class="tooltip" id="tooltip--phone" role="tooltip" hidden style="top: 12px; left: 200px;">Пожалуйста, укажите номер телефона</div>
     </fieldset>
 
     <div class="submit">
-      <button name="send">Заказать</button>
-      <p>Осталось заполнить:<br><label>адрес</label>, <label for="">и вот это</label> ну <label for="">и неплохо бы вот то</label>
+      <button name="send" disabled>Заказать</button>
+      <p></p>
     </div>
   </form>
 </div>
 
-<div class="tooltip" id="tooltip" role="tooltip" style="top: 803px; left: 530px;">Пожалуйста, укажите адрес</div>
+<!-- Сообщение об успешном отправлении данных -->
+<template id="success">
+  <div class="success">
+    <p class="success__message">Ваш заказ<br>успешно отправлен!</p>
+  </div>
+</template>
 
-  <script src="js/script.js"> </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.min.js"></script>
+
+  <script src="js/keyboard.js"> </script>
+  <script src="js/toggles.js"> </script>
+  <script src="js/maps.js"> </script>
+  <script src="js/slider.js"> </script>
+  <script src="js/validations.js"> </script>
+  <script src="js/backend.js"></script>
+
 </body>
 </html>

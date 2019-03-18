@@ -4,15 +4,15 @@
   "description": "Training task 2",
   "main": "index.html",
   "scripts": {
-    "test": "test"
+    "test": "eslint js/"
   },
   "author": "gonch",
   "license": "MIT",
   "dependencies": {
     "eslint": "^5.15.1",
-    "eslint-config-htmlacademy": "^0.5.2"
-  },
-  "scripts": {
-    "test": "eslint js/"
+    "eslint-config-htmlacademy": "^0.5.2",
+    "jquery": "^3.3.1",
+    "jquery-mask-plugin": "^1.14.15",
+    "jquery.maskedinput": "^1.4.1"
   }
 }
