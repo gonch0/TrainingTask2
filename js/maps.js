@@ -11,19 +11,6 @@
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1091.409621924636!2d60.57061390930074!3d56.83189028964316!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43c16ef8a184ce3d%3A0xdf927af0bf0ee96f!2z0YPQuy4g0JrRgNGL0LvQvtCy0LAsIDI3LCDQldC60LDRgtC10YDQuNC90LHRg9GA0LMsINCh0LLQtdGA0LTQu9C-0LLRgdC60LDRjyDQvtCx0LsuLCA2MjAwMjg!5e0!3m2!1sru!2sru!4v1551984578597'
   ];
 
-  var observeOption = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.7,
-    ratio: 0.2
-  };
-
-  var onMapEntry = function (entry) {
-    if (entry[0].intersectionRatio > observeOption.ratio) {
-      entry[0].target.src = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1295.4713959172564!2d60.60196258469401!3d56.90228167436167!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43c1721281d58859%3A0x4f3fbc71515a6ebd!2z0YPQuy4g0JjQvdC00YPRgdGC0YDQuNC4LCA1NSwg0JXQutCw0YLQtdGA0LjQvdCx0YPRgNCzLCDQodCy0LXRgNC00LvQvtCy0YHQutCw0Y8g0L7QsdC7LiwgNjIwMDk4!5e0!3m2!1sru!2sru!4v1551964763402';
-      observer.disconnect();
-    }
-  };
 
   var setAddress = function (evt) {
     var i = parseInt(evt.target.htmlFor.match(/\d/), 10) - 1;
@@ -40,10 +27,6 @@
       setAddress(evt);
     }
   };
-
-  // Observer для ленивой подгрузки карты
-  var observer = new IntersectionObserver(onMapEntry, observeOption);
-  observer.observe(mapFrame);
 
   var addMapListeners = function () {
     mapButtons.forEach(function (button) {
