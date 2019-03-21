@@ -2,8 +2,8 @@
 
 (function () {
   var mapFrame = document.querySelector('#mapFrame');
-  var mapButtons = document.querySelectorAll('input[name="pickup-point"] + label');
   var mapRadios = document.querySelectorAll('input[name="pickup-point"]');
+  var mapRadioGroup = document.querySelector('.map-radiogroup');
 
   var adresses = ['https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1295.4713959172564!2d60.60196258469401!3d56.90228167436167!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43c1721281d58859%3A0x4f3fbc71515a6ebd!2z0YPQuy4g0JjQvdC00YPRgdGC0YDQuNC4LCA1NSwg0JXQutCw0YLQtdGA0LjQvdCx0YPRgNCzLCDQodCy0LXRgNC00LvQvtCy0YHQutCw0Y8g0L7QsdC7LiwgNjIwMDk4!5e0!3m2!1sru!2sru!4v1551964763402',
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d647.6962040729163!2d60.59467160847741!3d56.90455879873532!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43c17213cfc35c13%3A0x14a13bd74afb2a07!2z0YPQuy4g0JvQvtC80L7QvdC-0YHQvtCy0LAsIDM4LCDQldC60LDRgtC10YDQuNC90LHRg9GA0LMsINCh0LLQtdGA0LTQu9C-0LLRgdC60LDRjyDQvtCx0LsuLCA2MjAwNDI!5e0!3m2!1sru!2sru!4v1551984225987',
@@ -12,36 +12,34 @@
   ];
 
 
-  var setAddress = function (evt) {
-    var i = parseInt(evt.target.htmlFor.match(/\d/), 10) - 1;
-    mapFrame.src = adresses[i];
-    mapRadios[i].checked = true;
+  var setAddress = function (index) {
+    mapFrame.src = adresses[index];
+    mapRadios[index].checked = true;
   };
 
-  var onMapButtonClick = function (evt) {
-    setAddress(evt);
+  var onMapRadioGroupChange = function (evt) {
+    var i = parseInt(evt.target.id.match(/\d/), 10) - 1;
+    setAddress(i);
   };
 
-  var onMapButtonKeydown = function (evt) {
+  var onMapRadioGroupKeydown = function (evt) {
     if (window.keyboard.isEnterPressed(evt)) {
-      setAddress(evt);
+      var i = parseInt(evt.target.htmlFor.match(/\d/), 10) - 1;
+      setAddress(i);
     }
   };
 
+
   var addMapListeners = function () {
-    mapButtons.forEach(function (button) {
-      button.addEventListener('click', onMapButtonClick);
-      button.addEventListener('keydown', onMapButtonKeydown);
-    });
+    mapRadioGroup.addEventListener('change', onMapRadioGroupChange);
+    mapRadioGroup.addEventListener('keydown', onMapRadioGroupKeydown);
   };
 
   addMapListeners();
 
   var removeMapListeners = function () {
-    mapButtons.forEach(function (button) {
-      button.removeEventListener('click', onMapButtonClick);
-      button.removeEventListener('keydown', onMapButtonKeydown);
-    });
+    mapRadioGroup.removeEventListener('change', onMapRadioGroupChange);
+    mapRadioGroup.removeEventListener('keydown', onMapRadioGroupKeydown);
   };
 
   window.maps = {

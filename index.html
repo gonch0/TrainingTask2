@@ -11,7 +11,7 @@
 
 <div id="layout">
   <form class="orderForm" enctype="multipart/form-data" method="post" autocomplete="off">
-    <div role="radiogroup">
+    <div class="order-radiogroup" role="radiogroup">
       <legend class="title">Способ получения товара</legend>
 
       <input type="radio" id="delivery-1" name="delivery-method" value="pickup" checked>
@@ -24,7 +24,7 @@
     <section>
       <fieldset role="tabpanel" aria-labelledby="pickup-label">
         <h2>Самовывоз</h2>
-        <div role="radiogroup">
+        <div class="map-radiogroup" role="radiogroup">
           <input type="radio" id="pickup-point-1" name="pickup-point" value="industrii" checked>
           <label for="pickup-point-1" tabindex="0">Индустрии, 55</label>
 
@@ -73,7 +73,7 @@
           <input type="text" value="10:00" id="time-to" name="time-to" readonly>
         </fieldset>
 
-        <div role="radiogroup" class="payment">
+        <div role="radiogroup" class="payment payment-radiogroup">
           <legend class="title">Способ оплаты</legend>
 
           <input type="radio" id="payment-card" name="payment-method" value="card" checked>

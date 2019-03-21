@@ -26,6 +26,9 @@
 
   var resetableInputs = document.querySelectorAll('input:not([type="radio"]):not([readonly])');
 
+  var orderRadiogroup = document.querySelector('.order-radiogroup');
+  var paymentRadiogroup = document.querySelector('.payment-radiogroup');
+
   var showDeliverySection = function () {
     showElements([deliverySection, phoneDeliveryDescription]);
     hideElements([pickupSection, phonePickupDescription]);
@@ -123,6 +126,15 @@
     window.validations.checkInputs();
   };
 
+
+  /*var onPaymentRadiogroupChange = function () {
+    toggleCardSection();
+    window.validations.addCardEventListeners();
+    toggleCardButtonListeners();
+  };
+
+  paymentRadiogroup.addEventListener('change', onPaymentRadiogroupChange);*/
+
   var onCardButtonClick = function () {
     toggleCardSection();
     window.validations.addCardEventListeners();
@@ -167,7 +179,7 @@
     cashButton.addEventListener('keydown', onCashButtonKeydown);
   };
 
-
+paymentRadiogroup
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
 
